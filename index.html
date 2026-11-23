@@ -430,7 +430,7 @@
      *    Example: installed: "images/1way-installed.jpg"
      * 3. Leave empty ("") to automatically render the built-in architectural SVG view.
      */
-    const UNITS_DATA = [
+const UNITS_DATA = [
       {
         id: '1-way',
         name: '1-Way Cassette',
@@ -446,17 +446,17 @@
         },
         quickChecklist: {
           airflow: 'Single-direction focused linear throw',
-          capacities: '0.8 – 2.2 TR',
-          ceilingDepth: 'Ultra-slim 185 – 200 mm false ceiling depth',
+          capacities: '0.6 – 2.6 TR',
+          ceilingDepth: 'Ultra-slim 225 – 230 mm false ceiling depth',
           idealArea: '100 – 250 sq. ft.'
         },
         fullSpecs: {
           airflowDirection: '1-Way focused horizontal/angled louver throw',
-          capacities: '0.8 TR, 1.0 TR, 1.5 TR, 2.0 TR, 2.2 TR',
-          ceilingDepth: 'Min. 185 – 200 mm (Ultra-slim chassis)',
+          capacities: '0.6 TR, 0.8 TR, 1.0 TR, 1.5 TR, 2.0 TR, 2.2 TR, 2.6 TR',
+          ceilingDepth: 'Min. 225 – 230 mm (Ultra-slim chassis)',
           idealRoomType: 'Corridors, Narrow Rooms, Perimeter Ceilings, Small Cabins & Bedrooms',
           areaCoverage: '100 – 250 sq. ft. (per unit)',
-          noiseLevel: '26 – 34 dB(A) — Whisper-quiet indoor operation',
+          noiseLevel: '27 – 50 dB(A) — Whisper-quiet indoor operation',
           keyBenefits: [
             'Fits extremely shallow false ceilings where standard cassettes cannot be installed.',
             'Perimeter ceiling mounting avoids direct cold drafts over beds or desks.',
@@ -480,17 +480,17 @@
         },
         quickChecklist: {
           airflow: 'Balanced dual opposite-direction throw',
-          capacities: '1.5 – 3.0 TR',
-          ceilingDepth: 'Slim 240 – 290 mm false ceiling depth',
+          capacities: '0.6 – 4.0 TR',
+          ceilingDepth: 'Slim 290 mm false ceiling depth',
           idealArea: '180 – 360 sq. ft.'
         },
         fullSpecs: {
           airflowDirection: '2-Way symmetrical opposite-side discharge louvers',
-          capacities: '1.5 TR, 2.0 TR, 2.5 TR, 3.0 TR',
-          ceilingDepth: 'Min. 240 – 290 mm false ceiling clearance',
+          capacities: '0.6 TR, 1.5 TR, 2.0 TR, 2.5 TR, 3.0 TR, 4.0 TR',
+          ceilingDepth: 'Min. 290 mm false ceiling clearance',
           idealRoomType: 'Long Rectangular Conference Rooms, Boutiques, Narrow Offices & Dining Halls',
           areaCoverage: '180 – 360 sq. ft. (per unit)',
-          noiseLevel: '29 – 38 dB(A) — Quiet conference-grade acoustics',
+          noiseLevel: '21 – 55 dB(A) — Quiet conference-grade acoustics',
           keyBenefits: [
             'Eliminates warm spots at far ends of long rectangular spaces.',
             'Narrow panel profile fits cleanly between parallel recessed ceiling lights.',
@@ -514,20 +514,20 @@
         },
         quickChecklist: {
           airflow: '360° / 4-direction surround multi-flow',
-          capacities: '1.5 – 4.0 TR',
-          ceilingDepth: 'Standard 260 – 300 mm false ceiling depth',
+          capacities: '1.0 – 4.6 TR',
+          ceilingDepth: 'Standard 258 – 298 mm false ceiling depth',
           idealArea: '200 – 550 sq. ft.'
         },
         fullSpecs: {
           airflowDirection: '360° surround / 4-way independent flap distribution',
-          capacities: '1.5 TR, 2.0 TR, 3.0 TR, 3.5 TR, 4.0 TR',
-          ceilingDepth: 'Min. 260 – 300 mm (Standard ceiling grid compatible)',
+          capacities: '1.0 TR, 1.5 TR, 2.0 TR, 3.0 TR, 4.0 TR, 4.6 TR',
+          ceilingDepth: 'Min. 258 – 298 mm (Standard ceiling grid compatible)',
           idealRoomType: 'Large Open Halls, Lobbies, Restaurants, Showrooms & Open-Plan Offices',
           areaCoverage: '200 – 550 sq. ft. (per unit)',
-          noiseLevel: '32 – 42 dB(A) — Balanced commercial acoustic profile',
+          noiseLevel: '26 – 45 dB(A) — Balanced commercial acoustic profile',
           keyBenefits: [
             'Fastest, most uniform 360° room cooling with zero dead corners.',
-            'High capacity range up to 4.0 TR handles high footfall & glass-facade heat loads.',
+            'High capacity range up to 4.6 TR handles high footfall & glass-facade heat loads.',
             'Optional fresh-air intake knock-out supports commercial ventilation standards.'
           ],
           serviceNote: 'Tool-free center filter grille and corner leveling pockets make preventive servicing and annual coil jet-cleaning fast.'
@@ -548,13 +548,13 @@
         },
         quickChecklist: {
           airflow: 'Direct front horizontal & vertical louver throw',
-          capacities: '1.0 – 2.0 TR',
+          capacities: '0.6 – 3.0 TR',
           ceilingDepth: 'No false ceiling required (Wall-mounted)',
           idealArea: '100 – 240 sq. ft.'
         },
         fullSpecs: {
           airflowDirection: 'Front motorized horizontal & vertical swing louver throw',
-          capacities: '1.0 TR, 1.5 TR, 2.0 TR',
+          capacities: '0.6 TR, 1.0 TR, 1.5 TR, 2.0 TR, 3.0 TR',
           ceilingDepth: 'Zero false ceiling required (Needs 150 mm gap below slab)',
           idealRoomType: 'Individual Cabins, Bedrooms, Server Rooms & Retrofit Spaces',
           areaCoverage: '100 – 240 sq. ft. (per unit)',
@@ -568,7 +568,6 @@
         }
       }
     ];
-
     // View definitions for the 3-slide interactive visual frame
     const VIEWS = [
       { key: 'installed', label: 'Installed View' },

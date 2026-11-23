@@ -1,0 +1,2061 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>KOOL MART — Service Visual Guide</title>
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Inter Font for Clean SaaS / Apple-like Legibility -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              DEFAULT: '#0F2A4A',
+              light: '#1E3A5F',
+            },
+            royal: {
+              DEFAULT: '#1D4ED8',
+              hover: '#1E40AF',
+              soft: '#EFF6FF',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Hide horizontal scrollbar on mobile tab/chip bars while keeping touch scroll smooth */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* Subtle entrance animations */
+    .card-fade {
+      animation: cardFade 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes cardFade {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .modal-sheet {
+      animation: modalSheet 0.24s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    @keyframes modalSheet {
+      from { opacity: 0; transform: translateY(20px) scale(0.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+  </style>
+</head>
+<body class="bg-[#F8FAFC] text-[#0F2A4A] font-sans antialiased selection:bg-blue-100 selection:text-[#1D4ED8] pb-24">
+
+  <!-- =====================================================================
+       STICKY MINIMAL HEADER + CATEGORY TABS + CLIENT NEED FILTER CHIPS
+       ===================================================================== -->
+  <header class="sticky top-0 z-30 bg-white/95 backdrop-blur-md border-b border-slate-200/90">
+    <!-- Top Brand & Action Bar -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
+      <!-- Brand Identity -->
+      <a href="#top" onclick="resetFilters(event)" class="flex items-center gap-2.5 min-w-0 group focus:outline-none">
+        <!-- Geometric K-Vent Brand Logo -->
+        <div class="w-9 h-9 rounded-xl bg-[#0F2A4A] text-white flex items-center justify-center shrink-0 shadow-xs group-hover:bg-[#1D4ED8] transition-colors">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <!-- Minimal Geometric K + Airflow Vent Louvers -->
+            <path d="M5 4v16" />
+            <path d="M5 12l7-7" />
+            <path d="M8.5 10.5L13 20" />
+            <path d="M15.5 7h4" stroke="#93C5FD" stroke-width="2" />
+            <path d="M16.5 12h3.5" stroke="#93C5FD" stroke-width="2" />
+            <path d="M15.5 17h4" stroke="#93C5FD" stroke-width="2" />
+          </svg>
+        </div>
+        <div class="leading-tight truncate">
+          <div class="font-bold text-[#0F2A4A] tracking-tight text-sm sm:text-base">KOOL MART</div>
+          <div class="text-[11px] sm:text-xs font-medium text-slate-500 truncate">Service Visual Guide</div>
+        </div>
+      </a>
+
+      <!-- Right Controls: Edit Mode Toggle + Share Link (WA) -->
+      <div class="flex items-center gap-2 sm:gap-2.5 shrink-0">
+        <!-- Edit Mode Toggle -->
+        <button
+          id="editModeToggleBtn"
+          type="button"
+          onclick="toggleEditMode()"
+          aria-pressed="false"
+          title="Toggle Edit Mode to test real site photos in-browser"
+          class="inline-flex items-center gap-2 px-3 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs font-medium text-[#0F2A4A] transition-all"
+        >
+          <span class="hidden sm:inline">Edit Mode</span>
+          <span class="sm:hidden">Edit</span>
+          <span id="editToggleTrack" class="w-8 h-4.5 rounded-full bg-slate-200 relative inline-flex items-center p-0.5 transition-colors">
+            <span id="editToggleThumb" class="w-3.5 h-3.5 rounded-full bg-white shadow-xs transform transition-transform translate-x-0"></span>
+          </span>
+        </button>
+
+        <!-- Share Link (WhatsApp) -->
+        <button
+          type="button"
+          onclick="shareCatalogueWhatsApp()"
+          class="inline-flex items-center gap-1.5 px-3 sm:px-3.5 py-2 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] active:scale-[0.98] text-white text-xs sm:text-sm font-medium transition-all shadow-xs"
+        >
+          <svg class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+          <span class="hidden sm:inline">Share Link (WA)</span>
+          <span class="sm:hidden">Share WA</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Primary Sticky Category Tabs -->
+    <div class="border-t border-slate-100 bg-white">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div
+          id="categoryTabsContainer"
+          class="flex items-center gap-1.5 sm:gap-2 overflow-x-auto no-scrollbar py-2.5"
+          role="tablist"
+          aria-label="AC Unit Categories"
+        >
+          <!-- Injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Secondary Subtle "Client Need" Quick Room Filter Chips -->
+    <div class="border-t border-slate-100 bg-[#F8FAFC]/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6">
+        <div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-2">
+          <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 shrink-0 pr-1">Client Need:</span>
+          <div id="roomFiltersContainer" class="flex items-center gap-1.5 shrink-0">
+            <!-- Injected by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- =====================================================================
+       EDIT MODE GUIDE BANNER (Visible only when Edit Mode is ON)
+       ===================================================================== -->
+  <section id="editModeBanner" class="hidden bg-blue-50/90 border-b border-blue-200/80">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3.5 flex flex-col md:flex-row md:items-center justify-between gap-3">
+      <div class="flex items-start gap-3">
+        <div class="w-8 h-8 rounded-lg bg-[#1D4ED8] text-white flex items-center justify-center shrink-0 mt-0.5">
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="text-xs sm:text-sm text-[#0F2A4A]">
+          <div class="font-semibold">Edit Mode Active — Preview Your Real Site Photos</div>
+          <p class="text-slate-600 mt-0.5 leading-relaxed">
+            Tap <strong>+ Upload Real Photo</strong> on any card to test your HOD's pictures directly in the browser. To save photos permanently, put them in an <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 text-[#1D4ED8] font-mono text-[11px]">images/</code> folder and update the <code class="px-1.5 py-0.5 bg-white rounded border border-blue-200 text-[#1D4ED8] font-mono text-[11px]">UNITS_DATA</code> array at the top of the script.
+          </p>
+        </div>
+      </div>
+      <div class="flex items-center gap-2 shrink-0 pl-11 md:pl-0">
+        <button
+          type="button"
+          onclick="openEditGuideModal()"
+          class="px-3 py-1.5 rounded-lg bg-white border border-blue-200 hover:border-[#1D4ED8] text-[#1D4ED8] text-xs font-semibold transition-colors"
+        >
+          How to Edit UNITS_DATA
+        </button>
+        <button
+          type="button"
+          onclick="toggleEditMode()"
+          class="px-3 py-1.5 rounded-lg bg-[#0F2A4A] hover:bg-slate-800 text-white text-xs font-medium transition-colors"
+        >
+          Done
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- =====================================================================
+       MAIN CATALOGUE WORKSPACE
+       ===================================================================== -->
+  <main id="top" class="max-w-7xl mx-auto px-4 sm:px-6 pt-6 sm:pt-8">
+    <!-- Minimal Section Context Header -->
+    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-2 mb-6">
+      <div>
+        <h1 id="catalogHeading" class="text-xl sm:text-2xl font-bold text-[#0F2A4A] tracking-tight">All Indoor Unit Options</h1>
+        <p id="catalogSubheading" class="text-xs sm:text-sm text-slate-500 mt-1">
+          Switch views on any unit to show installed look &amp; airflow, or tap <strong>+ Compare</strong> for side-by-side selection.
+        </p>
+      </div>
+      <div class="flex items-center gap-2 text-xs text-slate-500 self-start sm:self-auto">
+        <span id="unitCountBadge" class="px-2.5 py-1 rounded-full bg-white border border-slate-200 font-medium text-[#0F2A4A]">4 Units</span>
+      </div>
+    </div>
+
+    <!-- Responsive Product Grid (1-col mobile, 2-col tablet, 3-col desktop) -->
+    <div id="unitsGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+      <!-- Cards rendered dynamically by JS -->
+    </div>
+
+    <!-- Empty Filter Fallback -->
+    <div id="emptyState" class="hidden text-center py-16 px-4 bg-white rounded-2xl border border-slate-200">
+      <p class="text-sm font-semibold text-[#0F2A4A]">No units match this combination.</p>
+      <p class="text-xs text-slate-500 mt-1">Reset filters to view all cassette and hi-wall options.</p>
+      <button type="button" onclick="resetFilters()" class="mt-4 px-4 py-2 rounded-xl bg-[#1D4ED8] text-white text-xs font-medium hover:bg-[#1E40AF]">
+        Show All Units
+      </button>
+    </div>
+  </main>
+
+  <!-- =====================================================================
+       MINIMAL FOOTER
+       ===================================================================== -->
+  <footer class="max-w-7xl mx-auto px-4 sm:px-6 mt-12 pt-6 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-slate-500">
+    <div>&copy; <span id="footerYear"></span> KOOL MART &middot; HVAC Service Department Visual Catalogue</div>
+    <div class="flex items-center gap-3">
+      <button type="button" onclick="quickComparePreset()" class="text-[#1D4ED8] font-medium hover:underline">
+        Quick Compare: 1-Way vs 2-Way vs 4-Way
+      </button>
+    </div>
+  </footer>
+
+  <!-- =====================================================================
+       STICKY BOTTOM COMPARISON DRAWER BAR
+       ===================================================================== -->
+  <div id="compareBar" class="fixed bottom-4 left-1/2 -translate-x-1/2 z-40 w-[calc(100%-2rem)] max-w-xl hidden">
+    <div class="bg-[#0F2A4A] text-white rounded-2xl shadow-xl border border-slate-700/60 px-4 py-3 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5 min-w-0">
+        <div id="compareCountPill" class="w-7 h-7 rounded-lg bg-[#1D4ED8] text-white font-bold text-xs flex items-center justify-center shrink-0">
+          2
+        </div>
+        <div class="min-w-0">
+          <div id="compareBarTitle" class="text-xs sm:text-sm font-semibold truncate">2 Units Selected</div>
+          <div id="compareBarNames" class="text-[11px] text-slate-300 truncate">1-Way Cassette, 2-Way Cassette</div>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-2 shrink-0">
+        <button
+          type="button"
+          onclick="clearCompare()"
+          class="px-2.5 py-1.5 rounded-lg text-xs font-medium text-slate-300 hover:text-white hover:bg-white/10 transition-colors"
+        >
+          Clear
+        </button>
+        <button
+          id="openCompareBtn"
+          type="button"
+          onclick="openCompareModal()"
+          class="px-3.5 py-2 rounded-xl bg-[#1D4ED8] hover:bg-blue-500 text-white text-xs sm:text-sm font-semibold transition-all shadow-xs inline-flex items-center gap-1.5 disabled:opacity-50 disabled:cursor-not-allowed"
+        >
+          <span id="openCompareBtnLabel">Compare 2 Units</span>
+          <span aria-hidden="true">&rarr;</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Hidden Local File Picker for Edit Mode Photo Preview -->
+  <input id="localPhotoInput" type="file" accept="image/*" class="hidden" />
+
+  <!-- =====================================================================
+       FULL DETAILS MODAL
+       ===================================================================== -->
+  <div
+    id="detailsModal"
+    class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-[#0F2A4A]/50 backdrop-blur-[2px] p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="detailsModalTitle"
+    onclick="handleBackdropClick(event, 'detailsModal', closeDetailsModal)"
+  >
+    <div class="bg-white w-full sm:max-w-2xl max-h-[92vh] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden modal-sheet">
+      <!-- Modal Header -->
+      <div class="px-5 py-4 border-b border-slate-100 flex items-start justify-between gap-3 shrink-0">
+        <div class="min-w-0">
+          <div class="flex flex-wrap items-center gap-2 mb-1">
+            <span id="detailsAirflowBadge" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-blue-50 text-[#1D4ED8] border border-blue-100">
+              Airflow Badge
+            </span>
+            <span id="detailsBestForTag" class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-100 text-slate-600">
+              Best For Tag
+            </span>
+          </div>
+          <h2 id="detailsModalTitle" class="text-lg sm:text-xl font-bold text-[#0F2A4A] tracking-tight truncate">Unit Name</h2>
+        </div>
+        <button
+          type="button"
+          onclick="closeDetailsModal()"
+          aria-label="Close full details"
+          class="p-2 rounded-xl text-slate-400 hover:text-[#0F2A4A] hover:bg-slate-100 transition-colors shrink-0"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Modal Scrollable Body -->
+      <div id="detailsModalBody" class="p-5 overflow-y-auto space-y-5">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Modal Sticky Footer -->
+      <div id="detailsModalFooter" class="px-5 py-3.5 border-t border-slate-100 bg-[#F8FAFC] flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       SIDE-BY-SIDE COMPARISON MODAL
+       ===================================================================== -->
+  <div
+    id="compareModal"
+    class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-[#0F2A4A]/50 backdrop-blur-[2px] p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="compareModalTitle"
+    onclick="handleBackdropClick(event, 'compareModal', closeCompareModal)"
+  >
+    <div class="bg-white w-full sm:max-w-5xl max-h-[92vh] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden modal-sheet">
+      <!-- Header -->
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between gap-3 shrink-0">
+        <div>
+          <h2 id="compareModalTitle" class="text-lg sm:text-xl font-bold text-[#0F2A4A] tracking-tight">Side-by-Side Comparison</h2>
+          <p class="text-xs text-slate-500 mt-0.5">Clear visual &amp; technical breakdown for on-the-spot client decisions.</p>
+        </div>
+        <button
+          type="button"
+          onclick="closeCompareModal()"
+          aria-label="Close comparison"
+          class="p-2 rounded-xl text-slate-400 hover:text-[#0F2A4A] hover:bg-slate-100 transition-colors shrink-0"
+        >
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+
+      <!-- Quick Add/Remove Unit Pills inside Compare Modal -->
+      <div class="px-5 py-2.5 bg-[#F8FAFC] border-b border-slate-200 flex items-center gap-2 overflow-x-auto no-scrollbar shrink-0">
+        <span class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 shrink-0">Units:</span>
+        <div id="compareModalUnitPills" class="flex items-center gap-1.5 shrink-0">
+          <!-- Populated dynamically -->
+        </div>
+      </div>
+
+      <!-- Comparison Table Wrapper -->
+      <div id="compareTableContainer" class="p-4 sm:p-5 overflow-auto flex-1">
+        <!-- Populated dynamically -->
+      </div>
+
+      <!-- Footer -->
+      <div class="px-5 py-3.5 border-t border-slate-100 bg-[#F8FAFC] flex flex-wrap items-center justify-between gap-2.5 shrink-0">
+        <button
+          type="button"
+          onclick="closeCompareModal()"
+          class="px-4 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-medium text-[#0F2A4A]"
+        >
+          Back to Catalogue
+        </button>
+        <button
+          type="button"
+          onclick="shareComparisonWhatsApp()"
+          class="px-4 py-2 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-xs sm:text-sm font-semibold inline-flex items-center gap-1.5 shadow-xs"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Send Comparison on WhatsApp</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       EDIT GUIDE MODAL (Shows clean snippet of UNITS_DATA)
+       ===================================================================== -->
+  <div
+    id="editGuideModal"
+    class="fixed inset-0 z-50 hidden items-end sm:items-center justify-center bg-[#0F2A4A]/50 backdrop-blur-[2px] p-0 sm:p-4"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="editGuideTitle"
+    onclick="handleBackdropClick(event, 'editGuideModal', closeEditGuideModal)"
+  >
+    <div class="bg-white w-full sm:max-w-xl max-h-[88vh] rounded-t-3xl sm:rounded-2xl shadow-2xl border border-slate-200 flex flex-col overflow-hidden modal-sheet">
+      <div class="px-5 py-4 border-b border-slate-100 flex items-center justify-between">
+        <h2 id="editGuideTitle" class="text-base sm:text-lg font-bold text-[#0F2A4A]">Updating Photos &amp; Specs Permanently</h2>
+        <button type="button" onclick="closeEditGuideModal()" aria-label="Close guide" class="p-2 rounded-xl text-slate-400 hover:text-[#0F2A4A] hover:bg-slate-100">
+          <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="p-5 overflow-y-auto space-y-4 text-xs sm:text-sm text-slate-600">
+        <ol class="list-decimal pl-5 space-y-2">
+          <li>Create a folder named <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#0F2A4A]">images</code> next to this <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#0F2A4A]">index.html</code> file.</li>
+          <li>Place your HOD's real photos inside (for example: <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#0F2A4A]">1way-installed.jpg</code>).</li>
+          <li>Open <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#0F2A4A]">index.html</code> in any text editor and update the <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#1D4ED8]">images</code> fields inside <code class="px-1.5 py-0.5 bg-slate-100 rounded font-mono text-[#1D4ED8]">UNITS_DATA</code>:</li>
+        </ol>
+        <pre class="bg-[#0F2A4A] text-slate-100 p-4 rounded-xl text-[11px] sm:text-xs font-mono overflow-x-auto leading-relaxed">images: {
+  installed: "images/1way-installed.jpg",
+  closeup:   "images/1way-closeup.jpg",
+  airflow:   "" // leave empty to keep built-in diagram
+}</pre>
+        <p class="text-xs text-slate-500">
+          Leaving any image field as <code class="font-mono">""</code> automatically displays the built-in architectural SVG illustration—so there are never broken images.
+        </p>
+      </div>
+      <div class="px-5 py-3.5 border-t border-slate-100 bg-[#F8FAFC] flex justify-end">
+        <button type="button" onclick="closeEditGuideModal()" class="px-4 py-2 rounded-xl bg-[#1D4ED8] text-white text-xs sm:text-sm font-medium hover:bg-[#1E40AF]">
+          Got It
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       TOAST MESSAGE BOX (Replaces alert() cleanly)
+       ===================================================================== -->
+  <div id="toastBox" class="fixed bottom-20 left-1/2 -translate-x-1/2 z-50 pointer-events-none opacity-0 translate-y-2 transition-all duration-200">
+    <div class="bg-[#0F2A4A] text-white text-xs sm:text-sm font-medium px-4 py-2.5 rounded-full shadow-lg flex items-center gap-2 border border-slate-700/50">
+      <svg class="w-4 h-4 text-emerald-400 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+      <span id="toastText">Done</span>
+    </div>
+  </div>
+
+  <!-- =====================================================================
+       APPLICATION DATA & LOGIC
+       ===================================================================== -->
+  <script>
+    /**
+     * =========================================================================
+     * EASY-TO-EDIT PRODUCT CONFIGURATION (UNITS_DATA)
+     * =========================================================================
+     * To use your HOD's real photos permanently:
+     * 1. Place photos in an "images/" folder next to index.html.
+     * 2. Enter the file path inside `images.installed`, `images.closeup`, or `images.airflow`.
+     *    Example: installed: "images/1way-installed.jpg"
+     * 3. Leave empty ("") to automatically render the built-in architectural SVG view.
+     */
+    const UNITS_DATA = [
+      {
+        id: '1-way',
+        name: '1-Way Cassette',
+        tabLabel: '1-Way Cassette',
+        shortName: '1-Way',
+        airflowBadge: 'Single-Direction Throw',
+        bestForTag: 'Corridors & Tight Spaces',
+        roomCategories: ['corridors', 'cabins'],
+        images: {
+          installed: '', // e.g., "images/1way-installed.jpg"
+          closeup: '',   // e.g., "images/1way-closeup.jpg"
+          airflow: ''    // Leave empty to keep crisp airflow diagram
+        },
+        quickChecklist: {
+          airflow: 'Single-direction focused linear throw',
+          capacities: '0.8 – 2.2 TR',
+          ceilingDepth: 'Ultra-slim 185 – 200 mm false ceiling depth',
+          idealArea: '100 – 250 sq. ft.'
+        },
+        fullSpecs: {
+          airflowDirection: '1-Way focused horizontal/angled louver throw',
+          capacities: '0.8 TR, 1.0 TR, 1.5 TR, 2.0 TR, 2.2 TR',
+          ceilingDepth: 'Min. 185 – 200 mm (Ultra-slim chassis)',
+          idealRoomType: 'Corridors, Narrow Rooms, Perimeter Ceilings, Small Cabins & Bedrooms',
+          areaCoverage: '100 – 250 sq. ft. (per unit)',
+          noiseLevel: '26 – 34 dB(A) — Whisper-quiet indoor operation',
+          keyBenefits: [
+            'Fits extremely shallow false ceilings where standard cassettes cannot be installed.',
+            'Perimeter ceiling mounting avoids direct cold drafts over beds or desks.',
+            'Minimal linear fascia blends neatly along ceiling coves and lighting tracks.'
+          ],
+          serviceNote: 'Bottom service access panel allows quick filter cleaning and drain pump check without disturbing false ceiling plaster.'
+        }
+      },
+      {
+        id: '2-way',
+        name: '2-Way Cassette',
+        tabLabel: '2-Way Cassette',
+        shortName: '2-Way',
+        airflowBadge: 'Dual Opposite Throw',
+        bestForTag: 'Long & Rectangular Rooms',
+        roomCategories: ['rectangular'],
+        images: {
+          installed: '', // e.g., "images/2way-installed.jpg"
+          closeup: '',   // e.g., "images/2way-closeup.jpg"
+          airflow: ''
+        },
+        quickChecklist: {
+          airflow: 'Balanced dual opposite-direction throw',
+          capacities: '1.5 – 3.0 TR',
+          ceilingDepth: 'Slim 240 – 290 mm false ceiling depth',
+          idealArea: '180 – 360 sq. ft.'
+        },
+        fullSpecs: {
+          airflowDirection: '2-Way symmetrical opposite-side discharge louvers',
+          capacities: '1.5 TR, 2.0 TR, 2.5 TR, 3.0 TR',
+          ceilingDepth: 'Min. 240 – 290 mm false ceiling clearance',
+          idealRoomType: 'Long Rectangular Conference Rooms, Boutiques, Narrow Offices & Dining Halls',
+          areaCoverage: '180 – 360 sq. ft. (per unit)',
+          noiseLevel: '29 – 38 dB(A) — Quiet conference-grade acoustics',
+          keyBenefits: [
+            'Eliminates warm spots at far ends of long rectangular spaces.',
+            'Narrow panel profile fits cleanly between parallel recessed ceiling lights.',
+            'Dual louver control delivers uniform cooling without overpowering room width.'
+          ],
+          serviceNote: 'Hinged intake grille opens smoothly for wash-filter maintenance; built-in high-lift drain pump simplifies long piping runs.'
+        }
+      },
+      {
+        id: '4-way',
+        name: '4-Way Cassette',
+        tabLabel: '4-Way Cassette',
+        shortName: '4-Way',
+        airflowBadge: '360° Multi-Directional',
+        bestForTag: 'Large Open Halls & Offices',
+        roomCategories: ['open-halls'],
+        images: {
+          installed: '', // e.g., "images/4way-installed.jpg"
+          closeup: '',   // e.g., "images/4way-closeup.jpg"
+          airflow: ''
+        },
+        quickChecklist: {
+          airflow: '360° / 4-direction surround multi-flow',
+          capacities: '1.5 – 4.0 TR',
+          ceilingDepth: 'Standard 260 – 300 mm false ceiling depth',
+          idealArea: '200 – 550 sq. ft.'
+        },
+        fullSpecs: {
+          airflowDirection: '360° surround / 4-way independent flap distribution',
+          capacities: '1.5 TR, 2.0 TR, 3.0 TR, 3.5 TR, 4.0 TR',
+          ceilingDepth: 'Min. 260 – 300 mm (Standard ceiling grid compatible)',
+          idealRoomType: 'Large Open Halls, Lobbies, Restaurants, Showrooms & Open-Plan Offices',
+          areaCoverage: '200 – 550 sq. ft. (per unit)',
+          noiseLevel: '32 – 42 dB(A) — Balanced commercial acoustic profile',
+          keyBenefits: [
+            'Fastest, most uniform 360° room cooling with zero dead corners.',
+            'High capacity range up to 4.0 TR handles high footfall & glass-facade heat loads.',
+            'Optional fresh-air intake knock-out supports commercial ventilation standards.'
+          ],
+          serviceNote: 'Tool-free center filter grille and corner leveling pockets make preventive servicing and annual coil jet-cleaning fast.'
+        }
+      },
+      {
+        id: 'hi-wall',
+        name: 'Hi-Wall Split',
+        tabLabel: 'Hi-Wall Split',
+        shortName: 'Hi-Wall',
+        airflowBadge: 'Direct Front Throw',
+        bestForTag: 'Cabins, Bedrooms & Retrofits',
+        roomCategories: ['cabins', 'corridors'],
+        images: {
+          installed: '', // e.g., "images/hiwall-installed.jpg"
+          closeup: '',   // e.g., "images/hiwall-closeup.jpg"
+          airflow: ''
+        },
+        quickChecklist: {
+          airflow: 'Direct front horizontal & vertical louver throw',
+          capacities: '1.0 – 2.0 TR',
+          ceilingDepth: 'No false ceiling required (Wall-mounted)',
+          idealArea: '100 – 240 sq. ft.'
+        },
+        fullSpecs: {
+          airflowDirection: 'Front motorized horizontal & vertical swing louver throw',
+          capacities: '1.0 TR, 1.5 TR, 2.0 TR',
+          ceilingDepth: 'Zero false ceiling required (Needs 150 mm gap below slab)',
+          idealRoomType: 'Individual Cabins, Bedrooms, Server Rooms & Retrofit Spaces',
+          areaCoverage: '100 – 240 sq. ft. (per unit)',
+          noiseLevel: '24 – 36 dB(A) — Ultra-quiet sleep & office mode',
+          keyBenefits: [
+            'Preserves full room height with zero false ceiling civil work required.',
+            'Most budget-friendly installation and quickest turnaround time.',
+            'Ideal for ready-to-move cabins, 24x7 server rooms, and residential bedrooms.'
+          ],
+          serviceNote: 'Front flip-open lid lets anyone rinse dust filters in 2 minutes; full indoor coil servicing requires minimal downtime.'
+        }
+      }
+    ];
+
+    // View definitions for the 3-slide interactive visual frame
+    const VIEWS = [
+      { key: 'installed', label: 'Installed View' },
+      { key: 'closeup',   label: 'Unit Close-Up' },
+      { key: 'airflow',   label: 'Airflow Diagram' }
+    ];
+
+    // Primary Category Tabs
+    const CATEGORY_TABS = [
+      { id: 'all',     label: 'All Units' },
+      { id: '1-way',   label: '1-Way Cassette' },
+      { id: '2-way',   label: '2-Way Cassette' },
+      { id: '4-way',   label: '4-Way Cassette' },
+      { id: 'hi-wall', label: 'Hi-Wall Split' }
+    ];
+
+    // Secondary "Client Need" Quick Room Filter Chips
+    const ROOM_FILTERS = [
+      { id: 'all',         label: 'All Spaces' },
+      { id: 'corridors',   label: 'Corridors / Narrow' },
+      { id: 'rectangular', label: 'Long Rectangular' },
+      { id: 'open-halls',  label: 'Large Open Halls' },
+      { id: 'cabins',      label: 'Cabins / Bedrooms' }
+    ];
+
+    // =========================================================================
+    // APPLICATION STATE
+    // =========================================================================
+    const state = {
+      activeTab: 'all',
+      activeRoom: 'all',
+      editMode: false,
+      compareIds: [],
+      // Tracks active slide index (0, 1, 2) per unit card
+      cardViewIndex: {
+        '1-way': 0,
+        '2-way': 0,
+        '4-way': 0,
+        'hi-wall': 0
+      },
+      // Runtime uploaded photo preview URLs (ObjectURLs from browser file picker)
+      customPhotos: {
+        '1-way': {},
+        '2-way': {},
+        '4-way': {},
+        'hi-wall': {}
+      },
+      // Active modal state
+      activeDetailUnitId: null,
+      activeDetailViewIndex: 0,
+      // Pending photo upload target
+      uploadTarget: null
+    };
+
+    // =========================================================================
+    // ARCHITECTURAL INLINE SVG ILLUSTRATIONS (ZERO BROKEN IMAGES OUT OF BOX)
+    // =========================================================================
+    function getArchitecturalSVG(unitId, viewKey) {
+      if (viewKey === 'installed') return svgInstalledView(unitId);
+      if (viewKey === 'closeup')   return svgCloseupView(unitId);
+      return svgAirflowDiagram(unitId);
+    }
+
+    // 1. INSTALLED CEILING / ROOM PERSPECTIVE VIEWS
+    function svgInstalledView(unitId) {
+      if (unitId === '1-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1-Way Cassette installed in corridor ceiling">
+          <defs>
+            <linearGradient id="c1-wall" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#E2E8F0"/><stop offset="100%" stop-color="#F8FAFC"/>
+            </linearGradient>
+            <linearGradient id="c1-floor" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#E2E8F0"/><stop offset="100%" stop-color="#CBD5E1"/>
+            </linearGradient>
+            <linearGradient id="c1-air" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.22"/><stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Room Structure -->
+          <rect width="480" height="360" fill="#F1F5F9"/>
+          <!-- Ceiling -->
+          <polygon points="0,0 480,0 370,138 110,138" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <!-- Left Wall -->
+          <polygon points="0,0 110,138 110,275 0,360" fill="url(#c1-wall)" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Right Wall -->
+          <polygon points="480,0 370,138 370,275 480,360" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Back Wall -->
+          <rect x="110" y="138" width="260" height="137" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Floor -->
+          <polygon points="0,360 110,275 370,275 480,360" fill="url(#c1-floor)" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Minimal Architectural Door on Back Wall -->
+          <rect x="195" y="168" width="90" height="107" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1.2"/>
+          <circle cx="272" cy="224" r="2.5" fill="#94A3B8"/>
+          <!-- Recessed Cove Strip -->
+          <line x1="24" y1="18" x2="116" y2="132" stroke="#93C5FD" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+          <!-- Slim 1-Way Cassette Mounted Along Perimeter Ceiling -->
+          <g transform="translate(142, 34)">
+            <!-- Outer Bezel -->
+            <polygon points="14,0 182,0 196,52 0,52" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+            <polygon points="20,7 176,7 186,44 10,44" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+            <!-- Return Air Slats -->
+            <line x1="30" y1="16" x2="166" y2="16" stroke="#94A3B8" stroke-width="1.4"/>
+            <line x1="27" y1="22" x2="169" y2="22" stroke="#94A3B8" stroke-width="1.4"/>
+            <line x1="24" y1="28" x2="172" y2="28" stroke="#94A3B8" stroke-width="1.4"/>
+            <!-- Single Front Discharge Louver -->
+            <polygon points="18,35 178,35 182,42 14,42" fill="#E2E8F0" stroke="#64748B" stroke-width="1.1"/>
+            <!-- Tiny Power LED -->
+            <circle cx="170" cy="11" r="2" fill="#1D4ED8"/>
+          </g>
+          <!-- Single-Direction Focused Cool Airflow Plume & Arrows -->
+          <polygon points="158,76 320,76 355,210 125,210" fill="url(#c1-air)"/>
+          <g stroke="#1D4ED8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M190,82 Q182,135 172,182"/>
+            <path d="M166,174 L172,184 L180,176"/>
+            <path d="M240,82 Q240,140 240,194"/>
+            <path d="M233,185 L240,195 L247,185"/>
+            <path d="M290,82 Q298,135 308,182"/>
+            <path d="M300,176 L308,184 L314,174"/>
+          </g>
+          <!-- Subtle Tag -->
+          <rect x="16" y="318" width="166" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.92" stroke="#E2E8F0"/>
+          <text x="99" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0F2A4A">Perimeter Ceiling Install</text>
+        </svg>`;
+      }
+
+      if (unitId === '2-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2-Way Cassette installed in conference room ceiling">
+          <defs>
+            <linearGradient id="c2-airL" x1="1" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.22"/><stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="c2-airR" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.22"/><stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <rect width="480" height="360" fill="#F1F5F9"/>
+          <!-- Long Conference Room Ceiling -->
+          <polygon points="0,0 480,0 385,148 95,148" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <!-- Linear Ceiling Lights -->
+          <line x1="60" y1="12" x2="132" y2="138" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+          <line x1="420" y1="12" x2="348" y2="138" stroke="#CBD5E1" stroke-width="4" stroke-linecap="round"/>
+          <!-- Side & Back Walls -->
+          <polygon points="0,0 95,148 95,270 0,360" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1"/>
+          <polygon points="480,0 385,148 385,270 480,360" fill="#E2E8F0" stroke="#CBD5E1" stroke-width="1"/>
+          <rect x="95" y="148" width="290" height="122" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+          <!-- Projection Screen Outline -->
+          <rect x="175" y="168" width="130" height="68" rx="3" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1.4"/>
+          <!-- Floor & Minimal Conference Table -->
+          <polygon points="0,360 95,270 385,270 480,360" fill="#E2E8F0"/>
+          <polygon points="158,288 322,288 360,348 120,348" fill="#CBD5E1" stroke="#94A3B8" stroke-width="1.2"/>
+          <!-- 2-Way Cassette Mounted Centrally -->
+          <g transform="translate(152, 34)">
+            <polygon points="14,0 162,0 176,68 0,68" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+            <!-- Left Discharge Louver -->
+            <polygon points="10,12 24,12 18,56 4,56" fill="#E2E8F0" stroke="#64748B" stroke-width="1.1"/>
+            <!-- Right Discharge Louver -->
+            <polygon points="152,12 166,12 172,56 158,56" fill="#E2E8F0" stroke="#64748B" stroke-width="1.1"/>
+            <!-- Center Return Grille -->
+            <rect x="34" y="14" width="108" height="40" rx="2" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+            <line x1="42" y1="24" x2="134" y2="24" stroke="#94A3B8" stroke-width="1.3"/>
+            <line x1="42" y1="34" x2="134" y2="34" stroke="#94A3B8" stroke-width="1.3"/>
+            <line x1="42" y1="44" x2="134" y2="44" stroke="#94A3B8" stroke-width="1.3"/>
+            <circle cx="144" cy="9" r="2" fill="#1D4ED8"/>
+          </g>
+          <!-- Dual Opposite Airflow Plumes -->
+          <polygon points="158,68 152,96 42,190 42,126" fill="url(#c2-airL)"/>
+          <polygon points="322,68 328,96 438,190 438,126" fill="url(#c2-airR)"/>
+          <!-- Dual Opposite Blue Airflow Arrows -->
+          <g stroke="#1D4ED8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M150,76 Q105,94 62,135"/>
+            <path d="M64,124 L61,136 L73,134"/>
+            <path d="M148,90 Q112,114 78,162"/>
+            <path d="M77,151 L77,163 L88,159"/>
+            <path d="M330,76 Q375,94 418,135"/>
+            <path d="M407,134 L419,136 L416,124"/>
+            <path d="M332,90 Q368,114 402,162"/>
+            <path d="M392,159 L403,163 L403,151"/>
+          </g>
+          <rect x="16" y="318" width="182" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.92" stroke="#E2E8F0"/>
+          <text x="107" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0F2A4A">Balanced Opposite Throw</text>
+        </svg>`;
+      }
+
+      if (unitId === '4-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4-Way Cassette installed in open office hall">
+          <defs>
+            <radialGradient id="c4-air" cx="50%" cy="35%" r="55%">
+              <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.18"/>
+              <stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="480" height="360" fill="#F1F5F9"/>
+          <!-- Open Hall Ceiling with Subtle Grid Lines -->
+          <polygon points="0,0 480,0 420,152 60,152" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.5"/>
+          <line x1="120" y1="0" x2="145" y2="152" stroke="#F1F5F9" stroke-width="1.5"/>
+          <line x1="360" y1="0" x2="335" y2="152" stroke="#F1F5F9" stroke-width="1.5"/>
+          <line x1="25" y1="68" x2="455" y2="68" stroke="#F1F5F9" stroke-width="1.5"/>
+          <!-- Wide Open Office Glass Windows at Back -->
+          <rect x="60" y="152" width="360" height="122" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+          <rect x="85" y="168" width="90" height="90" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="1.2"/>
+          <rect x="195" y="168" width="90" height="90" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="1.2"/>
+          <rect x="305" y="168" width="90" height="90" fill="#EFF6FF" stroke="#CBD5E1" stroke-width="1.2"/>
+          <!-- Side Walls & Floor -->
+          <polygon points="0,0 60,152 60,274 0,360" fill="#E2E8F0" stroke="#CBD5E1"/>
+          <polygon points="480,0 420,152 420,274 480,360" fill="#E2E8F0" stroke="#CBD5E1"/>
+          <polygon points="0,360 60,274 420,274 480,360" fill="#E2E8F0"/>
+          <!-- 360° Ambient Cooling Glow -->
+          <ellipse cx="240" cy="118" rx="185" ry="95" fill="url(#c4-air)"/>
+          <!-- 4-Way Square Cassette Centered in Ceiling -->
+          <g transform="translate(150, 26)">
+            <polygon points="22,0 158,0 180,82 0,82" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+            <!-- 4 Discharge Louvers -->
+            <line x1="34" y1="10" x2="146" y2="10" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+            <line x1="16" y1="72" x2="164" y2="72" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+            <line x1="20" y1="18" x2="8" y2="62" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+            <line x1="160" y1="18" x2="172" y2="62" stroke="#64748B" stroke-width="3" stroke-linecap="round"/>
+            <!-- Center Return Grille -->
+            <polygon points="42,20 138,20 148,62 32,62" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+            <line x1="44" y1="30" x2="136" y2="30" stroke="#94A3B8" stroke-width="1.2"/>
+            <line x1="41" y1="41" x2="139" y2="41" stroke="#94A3B8" stroke-width="1.2"/>
+            <line x1="38" y1="52" x2="142" y2="52" stroke="#94A3B8" stroke-width="1.2"/>
+            <circle cx="156" cy="70" r="2.2" fill="#1D4ED8"/>
+          </g>
+          <!-- 4-Direction 360° Cool Blue Arrows -->
+          <g stroke="#1D4ED8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Left -->
+            <path d="M150,74 Q102,94 64,132"/>
+            <path d="M66,121 L63,133 L75,131"/>
+            <!-- Right -->
+            <path d="M330,74 Q378,94 416,132"/>
+            <path d="M405,131 L417,133 L414,121"/>
+            <!-- Front/Down -->
+            <path d="M240,112 Q240,152 240,192"/>
+            <path d="M233,183 L240,193 L247,183"/>
+            <!-- Rear/Up -->
+            <path d="M240,26 Q240,16 240,8"/>
+            <path d="M235,14 L240,7 L245,14"/>
+          </g>
+          <rect x="16" y="318" width="176" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.92" stroke="#E2E8F0"/>
+          <text x="104" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0F2A4A">360° Central Hall Install</text>
+        </svg>`;
+      }
+
+      // Hi-Wall Split Installed View
+      return `
+      <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hi-Wall Split AC mounted on cabin wall">
+        <defs>
+          <linearGradient id="hw-air" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#1D4ED8" stop-opacity="0.22"/><stop offset="100%" stop-color="#1D4ED8" stop-opacity="0"/>
+          </linearGradient>
+        </defs>
+        <rect width="480" height="360" fill="#F8FAFC"/>
+        <!-- Ceiling Strip (No False Ceiling Needed) -->
+        <polygon points="0,0 480,0 420,46 60,46" fill="#FFFFFF" stroke="#E2E8F0" stroke-width="1.2"/>
+        <!-- Main Back Wall -->
+        <rect x="60" y="46" width="360" height="240" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1"/>
+        <!-- Side Walls -->
+        <polygon points="0,0 60,46 60,286 0,360" fill="#E2E8F0" stroke="#CBD5E1"/>
+        <polygon points="480,0 420,46 420,286 480,360" fill="#E2E8F0" stroke="#CBD5E1"/>
+        <!-- Floor -->
+        <polygon points="0,360 60,286 420,286 480,360" fill="#E2E8F0"/>
+        <!-- Minimal Desk Silhouette -->
+        <rect x="135" y="246" width="210" height="10" rx="2" fill="#CBD5E1"/>
+        <rect x="150" y="256" width="8" height="44" fill="#94A3B8"/>
+        <rect x="322" y="256" width="8" height="44" fill="#94A3B8"/>
+        <!-- Clearance Indicator (150mm) -->
+        <line x1="115" y1="48" x2="115" y2="82" stroke="#94A3B8" stroke-width="1.2" stroke-dasharray="3 2"/>
+        <text x="108" y="69" text-anchor="end" font-family="Inter,sans-serif" font-size="9.5" font-weight="600" fill="#64748B">150mm</text>
+        <!-- Hi-Wall Split Indoor Unit Mounted on Upper Wall -->
+        <g transform="translate(130, 82)">
+          <!-- Unit Shadow -->
+          <rect x="4" y="6" width="220" height="58" rx="10" fill="#0F2A4A" fill-opacity="0.06"/>
+          <!-- Unit Chassis -->
+          <rect x="0" y="0" width="220" height="58" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="1.8"/>
+          <!-- Sleek Front Seam -->
+          <line x1="8" y1="38" x2="212" y2="38" stroke="#E2E8F0" stroke-width="1.4"/>
+          <!-- Bottom Discharge Louver -->
+          <rect x="18" y="45" width="184" height="8" rx="3" fill="#E2E8F0" stroke="#64748B" stroke-width="1"/>
+          <!-- Minimal Digital Temp Display -->
+          <rect x="172" y="14" width="28" height="14" rx="4" fill="#EFF6FF"/>
+          <text x="186" y="24.5" text-anchor="middle" font-family="Inter,sans-serif" font-size="9" font-weight="700" fill="#1D4ED8">24°</text>
+        </g>
+        <!-- Forward Sweeping Cool Airflow -->
+        <polygon points="150,136 330,136 376,240 104,240" fill="url(#hw-air)"/>
+        <g stroke="#1D4ED8" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M180,142 Q165,182 146,216"/>
+          <path d="M144,205 L145,217 L156,212"/>
+          <path d="M240,142 Q240,186 240,226"/>
+          <path d="M233,217 L240,227 L247,217"/>
+          <path d="M300,142 Q315,182 334,216"/>
+          <path d="M324,212 L335,217 L336,205"/>
+        </g>
+        <rect x="16" y="318" width="186" height="26" rx="13" fill="#FFFFFF" fill-opacity="0.92" stroke="#E2E8F0"/>
+        <text x="109" y="335" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0F2A4A">Zero False Ceiling Required</text>
+      </svg>`;
+    }
+
+    // 2. UNIT CLOSE-UP ARCHITECTURAL PRODUCT VIEWS
+    function svgCloseupView(unitId) {
+      if (unitId === '1-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1-Way Cassette close-up fascia">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <!-- Subtle Studio Grid -->
+          <pattern id="g1" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#E2E8F0" stroke-width="0.6"/></pattern>
+          <rect width="480" height="360" fill="url(#g1)" opacity="0.6"/>
+          <!-- 1-Way Cassette Isometric Fascia Close-Up -->
+          <g transform="translate(55, 108)">
+            <!-- Soft Shadow -->
+            <rect x="6" y="14" width="370" height="122" rx="14" fill="#0F2A4A" fill-opacity="0.07"/>
+            <!-- Outer Panel -->
+            <rect x="0" y="0" width="370" height="122" rx="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+            <rect x="12" y="12" width="346" height="98" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+            <!-- Return Air Intake Grille (Top Half) -->
+            <rect x="26" y="22" width="318" height="44" rx="4" fill="#FFFFFF" stroke="#CBD5E1" stroke-width="1"/>
+            <line x1="36" y1="32" x2="334" y2="32" stroke="#94A3B8" stroke-width="1.8"/>
+            <line x1="36" y1="44" x2="334" y2="44" stroke="#94A3B8" stroke-width="1.8"/>
+            <line x1="36" y1="56" x2="334" y2="56" stroke="#94A3B8" stroke-width="1.8"/>
+            <!-- Wide Single-Direction Swing Blade -->
+            <rect x="26" y="76" width="318" height="24" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <line x1="42" y1="88" x2="328" y2="88" stroke="#1D4ED8" stroke-width="1.5" stroke-dasharray="6 4"/>
+            <!-- Status Indicator -->
+            <circle cx="348" cy="18" r="3" fill="#1D4ED8"/>
+          </g>
+          <!-- Dimension Callout -->
+          <g>
+            <line x1="55" y1="74" x2="425" y2="74" stroke="#94A3B8" stroke-width="1.2"/>
+            <line x1="55" y1="68" x2="55" y2="80" stroke="#94A3B8" stroke-width="1.2"/>
+            <line x1="425" y1="68" x2="425" y2="80" stroke="#94A3B8" stroke-width="1.2"/>
+            <rect x="155" y="61" width="170" height="24" rx="12" fill="#FFFFFF" stroke="#CBD5E1"/>
+            <text x="240" y="77" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="600" fill="#0F2A4A">Ultra-Slim 185–200 mm</text>
+          </g>
+          <text x="240" y="294" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0F2A4A">1-Way Linear Ceiling Fascia Panel</text>
+          <text x="240" y="312" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">Single motorized blade + flush return grille</text>
+        </svg>`;
+      }
+
+      if (unitId === '2-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2-Way Cassette close-up fascia">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <pattern id="g2" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#E2E8F0" stroke-width="0.6"/></pattern>
+          <rect width="480" height="360" fill="url(#g2)" opacity="0.6"/>
+          <!-- 2-Way Rectangular Cassette Panel -->
+          <g transform="translate(65, 86)">
+            <rect x="6" y="14" width="350" height="164" rx="14" fill="#0F2A4A" fill-opacity="0.07"/>
+            <rect x="0" y="0" width="350" height="164" rx="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+            <!-- Top Discharge Blade -->
+            <rect x="34" y="14" width="282" height="22" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <line x1="50" y1="25" x2="300" y2="25" stroke="#1D4ED8" stroke-width="1.3" stroke-dasharray="6 4"/>
+            <!-- Bottom Discharge Blade -->
+            <rect x="34" y="128" width="282" height="22" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <line x1="50" y1="139" x2="300" y2="139" stroke="#1D4ED8" stroke-width="1.3" stroke-dasharray="6 4"/>
+            <!-- Center Intake Grille -->
+            <rect x="34" y="48" width="282" height="68" rx="6" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.2"/>
+            <line x1="48" y1="62" x2="302" y2="62" stroke="#94A3B8" stroke-width="1.6"/>
+            <line x1="48" y1="75" x2="302" y2="75" stroke="#94A3B8" stroke-width="1.6"/>
+            <line x1="48" y1="88" x2="302" y2="88" stroke="#94A3B8" stroke-width="1.6"/>
+            <line x1="48" y1="101" x2="302" y2="101" stroke="#94A3B8" stroke-width="1.6"/>
+            <circle cx="332" cy="24" r="3" fill="#1D4ED8"/>
+          </g>
+          <text x="240" y="294" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0F2A4A">2-Way Slim Rectangular Fascia</text>
+          <text x="240" y="312" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">Twin opposite louvers + hinged center filter grille</text>
+        </svg>`;
+      }
+
+      if (unitId === '4-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4-Way Cassette close-up square panel">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <pattern id="g4" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#E2E8F0" stroke-width="0.6"/></pattern>
+          <rect width="480" height="360" fill="url(#g4)" opacity="0.6"/>
+          <!-- Square 4-Way Cassette Panel -->
+          <g transform="translate(130, 44)">
+            <rect x="6" y="12" width="220" height="220" rx="16" fill="#0F2A4A" fill-opacity="0.07"/>
+            <rect x="0" y="0" width="220" height="220" rx="16" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+            <!-- 4 Discharge Flaps -->
+            <rect x="38" y="14" width="144" height="18" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <rect x="38" y="188" width="144" height="18" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <rect x="14" y="38" width="18" height="144" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <rect x="188" y="38" width="18" height="144" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+            <!-- Corner Service Pockets -->
+            <circle cx="22" cy="22" r="5" fill="#F1F5F9" stroke="#CBD5E1"/>
+            <circle cx="198" cy="22" r="5" fill="#F1F5F9" stroke="#CBD5E1"/>
+            <circle cx="22" cy="198" r="5" fill="#F1F5F9" stroke="#CBD5E1"/>
+            <circle cx="198" cy="198" r="5" fill="#1D4ED8"/>
+            <!-- Center Return Grille -->
+            <rect x="46" y="46" width="128" height="128" rx="8" fill="#F8FAFC" stroke="#CBD5E1" stroke-width="1.4"/>
+            <g stroke="#94A3B8" stroke-width="1.4">
+              <line x1="58" y1="64" x2="162" y2="64"/>
+              <line x1="58" y1="80" x2="162" y2="80"/>
+              <line x1="58" y1="96" x2="162" y2="96"/>
+              <line x1="58" y1="112" x2="162" y2="112"/>
+              <line x1="58" y1="128" x2="162" y2="128"/>
+              <line x1="58" y1="144" x2="162" y2="144"/>
+              <line x1="58" y1="160" x2="162" y2="160"/>
+            </g>
+          </g>
+          <text x="240" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0F2A4A">4-Way Square Ceiling Panel (360°)</text>
+          <text x="240" y="320" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">4 independent louvers + corner leveling pockets</text>
+        </svg>`;
+      }
+
+      // Hi-Wall Close-Up
+      return `
+      <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hi-Wall Split AC indoor unit close-up">
+        <rect width="480" height="360" fill="#F8FAFC"/>
+        <pattern id="ghw" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0v24" fill="none" stroke="#E2E8F0" stroke-width="0.6"/></pattern>
+        <rect width="480" height="360" fill="url(#ghw)" opacity="0.6"/>
+        <g transform="translate(55, 108)">
+          <rect x="6" y="14" width="370" height="106" rx="18" fill="#0F2A4A" fill-opacity="0.08"/>
+          <!-- Main Body -->
+          <rect x="0" y="0" width="370" height="106" rx="18" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <!-- Subtle Top Intake Accent -->
+          <line x1="22" y1="10" x2="348" y2="10" stroke="#E2E8F0" stroke-width="2" stroke-linecap="round"/>
+          <!-- Front Panel Contoured Line -->
+          <path d="M10,66 Q185,74 360,66" fill="none" stroke="#E2E8F0" stroke-width="1.6"/>
+          <!-- Digital LED Display -->
+          <rect x="288" y="26" width="48" height="24" rx="6" fill="#EFF6FF" stroke="#BFDBFE"/>
+          <text x="312" y="42" text-anchor="middle" font-family="Inter,sans-serif" font-size="13" font-weight="700" fill="#1D4ED8">24°C</text>
+          <!-- Minimal Brand Accent Bar -->
+          <rect x="28" y="34" width="46" height="5" rx="2.5" fill="#CBD5E1"/>
+          <!-- Open Motorized Bottom Louver -->
+          <rect x="24" y="80" width="322" height="16" rx="5" fill="#EFF6FF" stroke="#1D4ED8" stroke-width="1.5"/>
+          <line x1="40" y1="88" x2="330" y2="88" stroke="#1D4ED8" stroke-width="1.4" stroke-dasharray="6 4"/>
+        </g>
+        <text x="240" y="284" text-anchor="middle" font-family="Inter,sans-serif" font-size="12" font-weight="600" fill="#0F2A4A">Hi-Wall Split Indoor Unit</text>
+        <text x="240" y="302" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" fill="#64748B">Flip-open washable filter lid + smart swing louver</text>
+      </svg>`;
+    }
+
+    // 3. TOP-DOWN / CROSS-SECTION AIRFLOW DIAGRAMS
+    function svgAirflowDiagram(unitId) {
+      if (unitId === '1-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="1-Way Cassette airflow pattern diagram">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <!-- Room Floorplan Box (Narrow Corridor / Perimeter) -->
+          <rect x="52" y="54" width="376" height="224" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <text x="240" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.06em">TOP-DOWN AIRFLOW COVERAGE</text>
+          <!-- Perimeter Mounted 1-Way Unit on Left Edge -->
+          <rect x="66" y="106" width="36" height="120" rx="6" fill="#0F2A4A"/>
+          <text x="84" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="9.5" font-weight="700" fill="#FFFFFF" transform="rotate(-90 84 170)">1-WAY</text>
+          <!-- Focused Single-Direction Blue Stream -->
+          <path d="M108,116 L392,84 L392,248 L108,216 Z" fill="#1D4ED8" fill-opacity="0.08"/>
+          <g stroke="#1D4ED8" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="118" y1="130" x2="364" y2="108"/>
+            <path d="M352,101 L366,108 L354,117"/>
+            <line x1="118" y1="166" x2="386" y2="166"/>
+            <path d="M374,158 L388,166 L374,174"/>
+            <line x1="118" y1="202" x2="364" y2="224"/>
+            <path d="M354,215 L366,224 L352,231"/>
+          </g>
+          <!-- Callout Pill -->
+          <rect x="130" y="298" width="220" height="30" rx="15" fill="#EFF6FF" stroke="#BFDBFE"/>
+          <text x="240" y="317" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8">Focused Single-Direction Throw</text>
+        </svg>`;
+      }
+
+      if (unitId === '2-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="2-Way Cassette dual opposite airflow diagram">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <text x="240" y="40" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.06em">TOP-DOWN AIRFLOW COVERAGE</text>
+          <!-- Long Rectangular Room -->
+          <rect x="36" y="74" width="408" height="184" rx="12" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <!-- Centered 2-Way Unit -->
+          <rect x="214" y="106" width="52" height="120" rx="7" fill="#0F2A4A"/>
+          <text x="240" y="170" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" font-weight="700" fill="#FFFFFF">2-WAY</text>
+          <!-- Dual Opposite Airflow Cones -->
+          <path d="M210,118 L52,92 L52,240 L210,214 Z" fill="#1D4ED8" fill-opacity="0.09"/>
+          <path d="M270,118 L428,92 L428,240 L270,214 Z" fill="#1D4ED8" fill-opacity="0.09"/>
+          <!-- Arrows Left & Right -->
+          <g stroke="#1D4ED8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="204" y1="142" x2="66" y2="128"/>
+            <path d="M78,121 L64,128 L76,137"/>
+            <line x1="204" y1="190" x2="66" y2="204"/>
+            <path d="M76,195 L64,204 L78,211"/>
+
+            <line x1="276" y1="142" x2="414" y2="128"/>
+            <path d="M402,121 L416,128 L404,137"/>
+            <line x1="276" y1="190" x2="414" y2="204"/>
+            <path d="M404,195 L416,204 L402,211"/>
+          </g>
+          <rect x="116" y="294" width="248" height="30" rx="15" fill="#EFF6FF" stroke="#BFDBFE"/>
+          <text x="240" y="313" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8">Symmetrical Dual Opposite Throw</text>
+        </svg>`;
+      }
+
+      if (unitId === '4-way') {
+        return `
+        <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="4-Way Cassette 360 degree airflow diagram">
+          <rect width="480" height="360" fill="#F8FAFC"/>
+          <text x="240" y="34" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.06em">TOP-DOWN 360° COVERAGE</text>
+          <!-- Large Open Square Hall -->
+          <rect x="76" y="48" width="328" height="232" rx="14" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+          <!-- 360° Cooling Zone Circle -->
+          <ellipse cx="240" cy="164" rx="146" ry="102" fill="#1D4ED8" fill-opacity="0.08" stroke="#93C5FD" stroke-dasharray="5 4"/>
+          <!-- Centered 4-Way Unit -->
+          <rect x="206" y="130" width="68" height="68" rx="10" fill="#0F2A4A"/>
+          <text x="240" y="168" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#FFFFFF">4-WAY</text>
+          <!-- 4-Way Arrows -->
+          <g stroke="#1D4ED8" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round">
+            <!-- Up -->
+            <line x1="240" y1="122" x2="240" y2="66"/>
+            <path d="M232,77 L240,64 L248,77"/>
+            <!-- Down -->
+            <line x1="240" y1="206" x2="240" y2="262"/>
+            <path d="M232,251 L240,264 L248,251"/>
+            <!-- Left -->
+            <line x1="198" y1="164" x2="104" y2="164"/>
+            <path d="M116,156 L102,164 L116,172"/>
+            <!-- Right -->
+            <line x1="282" y1="164" x2="376" y2="164"/>
+            <path d="M364,156 L378,164 L364,172"/>
+          </g>
+          <rect x="116" y="298" width="248" height="30" rx="15" fill="#EFF6FF" stroke="#BFDBFE"/>
+          <text x="240" y="317" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8">Uniform 360° Multi-Directional Flow</text>
+        </svg>`;
+      }
+
+      // Hi-Wall Split Side-Profile Airflow Diagram
+      return `
+      <svg viewBox="0 0 480 360" class="w-full h-full block" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Hi-Wall Split side profile airflow diagram">
+        <rect width="480" height="360" fill="#F8FAFC"/>
+        <text x="240" y="38" text-anchor="middle" font-family="Inter,sans-serif" font-size="11" font-weight="700" fill="#64748B" letter-spacing="0.06em">SIDE-PROFILE AIRFLOW THROW</text>
+        <!-- Room Cross-Section -->
+        <rect x="52" y="54" width="376" height="224" rx="10" fill="#FFFFFF" stroke="#94A3B8" stroke-width="2"/>
+        <!-- Slab Label -->
+        <text x="240" y="72" text-anchor="middle" font-family="Inter,sans-serif" font-size="10" fill="#94A3B8">Concrete Ceiling Slab (No False Ceiling Needed)</text>
+        <!-- Wall-Mounted Hi-Wall Unit -->
+        <rect x="56" y="88" width="52" height="34" rx="6" fill="#0F2A4A"/>
+        <text x="82" y="108" text-anchor="middle" font-family="Inter,sans-serif" font-size="8.5" font-weight="700" fill="#FFFFFF">HI-WALL</text>
+        <!-- Sweeping Horizontal & Angled Throw -->
+        <path d="M110,104 Q255,95 405,155 L380,254 Q230,225 110,124 Z" fill="#1D4ED8" fill-opacity="0.09"/>
+        <g stroke="#1D4ED8" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M116,104 Q252,102 390,148"/>
+          <path d="M378,136 L392,149 L374,151"/>
+          <path d="M116,114 Q230,142 346,204"/>
+          <path d="M336,190 L348,205 L329,205"/>
+          <path d="M114,122 Q185,175 244,244"/>
+          <path d="M242,229 L246,246 L230,240"/>
+        </g>
+        <rect x="114" y="298" width="252" height="30" rx="15" fill="#EFF6FF" stroke="#BFDBFE"/>
+        <text x="240" y="317" text-anchor="middle" font-family="Inter,sans-serif" font-size="11.5" font-weight="600" fill="#1D4ED8">Direct Front Horizontal &amp; Swing Throw</text>
+      </svg>`;
+    }
+
+    // =========================================================================
+    // HELPER FUNCTIONS
+    // =========================================================================
+
+    function getUnitById(id) {
+      return UNITS_DATA.find(u => u.id === id);
+    }
+
+    /**
+     * Resolves the visual image source for a given unit & viewKey.
+     * Priority: 1. In-browser uploaded photo (Edit Mode), 2. UNITS_DATA image path, 3. Built-in Architectural SVG.
+     */
+    function getResolvedImageSrc(unit, viewKey) {
+      const uploaded = state.customPhotos[unit.id] && state.customPhotos[unit.id][viewKey];
+      if (uploaded) return { src: uploaded, isCustomUpload: true };
+      const configured = unit.images && unit.images[viewKey] ? unit.images[viewKey].trim() : '';
+      if (configured) return { src: configured, isCustomUpload: false };
+      return { src: null, isCustomUpload: false };
+    }
+
+    /**
+     * Builds the inner HTML of the 4:3 visual frame (either real <img> with SVG fallback or inline SVG).
+     */
+    function renderVisualContent(unit, viewKey) {
+      const resolved = getResolvedImageSrc(unit, viewKey);
+      const fallbackSvg = getArchitecturalSVG(unit.id, viewKey);
+
+      if (resolved.src) {
+        // Real photo with graceful fallback to built-in SVG if file path is missing
+        return `
+          <div class="w-full h-full relative bg-slate-100">
+            <img
+              src="${resolved.src}"
+              alt="${unit.name} — ${viewKey}"
+              class="w-full h-full object-cover"
+              onerror="this.style.display='none'; this.nextElementSibling.classList.remove('hidden');"
+            />
+            <div class="hidden w-full h-full">${fallbackSvg}</div>
+          </div>
+        `;
+      }
+      return fallbackSvg;
+    }
+
+    function showToast(message) {
+      const box = document.getElementById('toastBox');
+      const text = document.getElementById('toastText');
+      text.textContent = message;
+      box.classList.remove('opacity-0', 'translate-y-2');
+      box.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(window.__toastTimer);
+      window.__toastTimer = setTimeout(() => {
+        box.classList.add('opacity-0', 'translate-y-2');
+        box.classList.remove('opacity-100', 'translate-y-0');
+      }, 2500);
+    }
+
+    function copyTextToClipboard(text, successMsg) {
+      try {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        textarea.setAttribute('readonly', '');
+        textarea.style.position = 'fixed';
+        textarea.style.left = '-9999px';
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        showToast(successMsg || 'Copied to clipboard');
+      } catch (err) {
+        showToast('Could not copy automatically');
+      }
+    }
+
+    // =========================================================================
+    // FILTERING & NAVIGATION RENDERERS
+    // =========================================================================
+
+    function getFilteredUnits() {
+      return UNITS_DATA.filter(unit => {
+        const matchTab = state.activeTab === 'all' || unit.id === state.activeTab;
+        const matchRoom = state.activeRoom === 'all' || unit.roomCategories.includes(state.activeRoom);
+        return matchTab && matchRoom;
+      });
+    }
+
+    function selectCategoryTab(tabId) {
+      state.activeTab = tabId;
+      // When jumping directly to a specific unit tab, reset room filter so the unit is guaranteed visible
+      if (tabId !== 'all') {
+        state.activeRoom = 'all';
+      }
+      renderAll();
+    }
+
+    function selectRoomFilter(roomId) {
+      state.activeRoom = roomId;
+      // When filtering by Client Need / Room Type, switch primary tab to All Units so all matching options show up
+      if (roomId !== 'all') {
+        state.activeTab = 'all';
+      }
+      renderAll();
+    }
+
+    function resetFilters(e) {
+      if (e) e.preventDefault();
+      state.activeTab = 'all';
+      state.activeRoom = 'all';
+      renderAll();
+    }
+
+    function renderCategoryTabs() {
+      const container = document.getElementById('categoryTabsContainer');
+      container.innerHTML = CATEGORY_TABS.map(tab => {
+        const isActive = state.activeTab === tab.id;
+        return `
+          <button
+            type="button"
+            role="tab"
+            aria-selected="${isActive}"
+            onclick="selectCategoryTab('${tab.id}')"
+            class="px-3.5 py-2 rounded-full text-xs sm:text-sm font-medium whitespace-nowrap transition-all shrink-0 ${
+              isActive
+                ? 'bg-[#0F2A4A] text-white shadow-xs'
+                : 'text-slate-600 hover:text-[#0F2A4A] hover:bg-slate-100'
+            }"
+          >
+            ${tab.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function renderRoomFilters() {
+      const container = document.getElementById('roomFiltersContainer');
+      container.innerHTML = ROOM_FILTERS.map(chip => {
+        const isActive = state.activeRoom === chip.id;
+        return `
+          <button
+            type="button"
+            onclick="selectRoomFilter('${chip.id}')"
+            class="px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap border transition-all ${
+              isActive
+                ? 'bg-[#EFF6FF] border-[#1D4ED8] text-[#1D4ED8]'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-slate-300 hover:text-[#0F2A4A]'
+            }"
+          >
+            ${chip.label}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function updateSectionHeading(filtered) {
+      const heading = document.getElementById('catalogHeading');
+      const subheading = document.getElementById('catalogSubheading');
+      const countBadge = document.getElementById('unitCountBadge');
+
+      countBadge.textContent = `${filtered.length} ${filtered.length === 1 ? 'Unit' : 'Units'}`;
+
+      if (state.activeTab !== 'all') {
+        const unit = getUnitById(state.activeTab);
+        heading.textContent = unit ? unit.name : 'Selected Unit';
+        subheading.textContent = unit
+          ? `${unit.airflowBadge} — Ideal for ${unit.bestForTag}.`
+          : '';
+      } else if (state.activeRoom !== 'all') {
+        const room = ROOM_FILTERS.find(r => r.id === state.activeRoom);
+        heading.textContent = `Recommended for ${room ? room.label : 'Selected Space'}`;
+        subheading.textContent = 'Filtered indoor AC options best suited to this room layout.';
+      } else {
+        heading.textContent = 'All Indoor Unit Options';
+        subheading.textContent = 'Switch views on any unit to show installed look & airflow, or tap + Compare for side-by-side selection.';
+      }
+    }
+
+    // =========================================================================
+    // PRODUCT CARDS RENDERER
+    // =========================================================================
+
+    function renderUnitsGrid() {
+      const grid = document.getElementById('unitsGrid');
+      const emptyState = document.getElementById('emptyState');
+      const filtered = getFilteredUnits();
+
+      updateSectionHeading(filtered);
+
+      if (filtered.length === 0) {
+        grid.innerHTML = '';
+        emptyState.classList.remove('hidden');
+        return;
+      }
+
+      emptyState.classList.add('hidden');
+
+      // When viewing a single unit tab on desktop, give it a sleek balanced width
+      if (filtered.length === 1) {
+        grid.className = 'grid grid-cols-1 max-w-xl mx-auto gap-6';
+      } else if (filtered.length === 2) {
+        grid.className = 'grid grid-cols-1 md:grid-cols-2 max-w-4xl mx-auto gap-5 sm:gap-6';
+      } else {
+        grid.className = 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6';
+      }
+
+      grid.innerHTML = filtered.map(unit => {
+        const viewIdx = state.cardViewIndex[unit.id] || 0;
+        const viewObj = VIEWS[viewIdx];
+        const isComparing = state.compareIds.includes(unit.id);
+        const resolved = getResolvedImageSrc(unit, viewObj.key);
+
+        return `
+          <article class="card-fade bg-white rounded-2xl border ${isComparing ? 'border-[#1D4ED8] ring-2 ring-blue-100' : 'border-slate-200'} shadow-[0_1px_3px_rgba(15,42,74,0.04)] hover:shadow-[0_8px_24px_rgba(15,42,74,0.07)] transition-all flex flex-col overflow-hidden">
+            
+            <!-- Card Header -->
+            <div class="px-5 pt-5 pb-3.5">
+              <div class="flex items-start justify-between gap-2">
+                <h2 class="text-lg font-bold text-[#0F2A4A] tracking-tight leading-snug">${unit.name}</h2>
+                <span class="shrink-0 inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#EFF6FF] text-[#1D4ED8] border border-blue-100">
+                  ${unit.airflowBadge}
+                </span>
+              </div>
+              <div class="mt-2 flex items-center gap-1.5 text-xs text-slate-500">
+                <span class="font-semibold text-[#0F2A4A]">Best for:</span>
+                <span>${unit.bestForTag}</span>
+              </div>
+            </div>
+
+            <!-- Interactive Multi-View Visual Frame (4:3) -->
+            <div class="px-5">
+              <div class="relative aspect-[4/3] w-full rounded-xl overflow-hidden border border-slate-200/80 bg-slate-50 group">
+                <!-- Clickable Visual Canvas (opens Full Details) -->
+                <div
+                  onclick="openDetailsModal('${unit.id}')"
+                  class="w-full h-full cursor-pointer"
+                  title="Tap to expand ${unit.name} details"
+                >
+                  ${renderVisualContent(unit, viewObj.key)}
+                </div>
+
+                <!-- Top-Left View Pill Indicator -->
+                <div class="absolute top-2.5 left-2.5 pointer-events-none flex items-center gap-1.5">
+                  <span class="px-2.5 py-1 rounded-full bg-white/95 backdrop-blur-xs border border-slate-200/90 text-[11px] font-semibold text-[#0F2A4A] shadow-xs">
+                    ${viewObj.label}
+                  </span>
+                  <span class="px-2 py-1 rounded-full bg-[#0F2A4A]/85 text-white text-[10px] font-semibold">
+                    ${viewIdx + 1}/3
+                  </span>
+                </div>
+
+                <!-- Prev / Next View Buttons -->
+                <button
+                  type="button"
+                  onclick="cycleCardView(event, '${unit.id}', -1)"
+                  aria-label="Previous view for ${unit.name}"
+                  class="absolute left-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-[#0F2A4A] flex items-center justify-center shadow-sm transition-all active:scale-95"
+                >
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 18l-6-6 6-6"/></svg>
+                </button>
+                <button
+                  type="button"
+                  onclick="cycleCardView(event, '${unit.id}', 1)"
+                  aria-label="Next view for ${unit.name}"
+                  class="absolute right-2 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/90 hover:bg-white border border-slate-200 text-[#0F2A4A] flex items-center justify-center shadow-sm transition-all active:scale-95"
+                >
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 18l6-6-6-6"/></svg>
+                </button>
+
+                <!-- Bottom Mini View Switcher Dots/Pills -->
+                <div class="absolute bottom-2.5 right-2.5 flex items-center gap-1 bg-white/95 backdrop-blur-xs p-1 rounded-full border border-slate-200/90 shadow-xs">
+                  ${VIEWS.map((v, idx) => `
+                    <button
+                      type="button"
+                      onclick="setCardView(event, '${unit.id}', ${idx})"
+                      aria-label="Show ${v.label}"
+                      class="px-2 py-0.5 rounded-full text-[10px] font-semibold transition-colors ${
+                        idx === viewIdx
+                          ? 'bg-[#1D4ED8] text-white'
+                          : 'text-slate-500 hover:text-[#0F2A4A]'
+                      }"
+                    >
+                      ${idx + 1}/3
+                    </button>
+                  `).join('')}
+                </div>
+
+                <!-- Edit Mode Overlay (+ Upload Real Photo) -->
+                ${state.editMode ? `
+                  <div class="absolute inset-x-0 top-0 bottom-0 bg-[#0F2A4A]/25 backdrop-blur-[1px] flex flex-col items-center justify-center gap-2 p-3">
+                    <button
+                      type="button"
+                      onclick="triggerPhotoUpload(event, '${unit.id}', '${viewObj.key}')"
+                      class="px-3.5 py-2 rounded-xl bg-white hover:bg-blue-50 text-[#1D4ED8] font-semibold text-xs shadow-md border border-blue-200 inline-flex items-center gap-1.5 transition-transform active:scale-95"
+                    >
+                      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                      <span>+ Upload Real Photo (${viewObj.label})</span>
+                    </button>
+                    ${resolved.isCustomUpload ? `
+                      <button
+                        type="button"
+                        onclick="resetUploadedPhoto(event, '${unit.id}', '${viewObj.key}')"
+                        class="px-2.5 py-1 rounded-lg bg-[#0F2A4A]/90 text-white text-[11px] font-medium hover:bg-[#0F2A4A]"
+                      >
+                        Reset to Default View
+                      </button>
+                    ` : ''}
+                  </div>
+                ` : ''}
+              </div>
+            </div>
+
+            <!-- Scannable Technical Checklist -->
+            <div class="px-5 py-4 flex-1">
+              <div class="text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2.5">Quick Specs</div>
+              <ul class="space-y-2 text-xs sm:text-[13px] text-slate-600">
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong class="text-[#0F2A4A] font-semibold">Airflow:</strong> ${unit.quickChecklist.airflow}</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong class="text-[#0F2A4A] font-semibold">Capacities:</strong> ${unit.quickChecklist.capacities}</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong class="text-[#0F2A4A] font-semibold">Ceiling:</strong> ${unit.quickChecklist.ceilingDepth}</span>
+                </li>
+                <li class="flex items-start gap-2">
+                  <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+                  <span><strong class="text-[#0F2A4A] font-semibold">Ideal Area:</strong> ${unit.quickChecklist.idealArea}</span>
+                </li>
+              </ul>
+            </div>
+
+            <!-- Card Footer Actions -->
+            <div class="px-5 py-3.5 bg-[#F8FAFC] border-t border-slate-100 flex items-center gap-2">
+              <button
+                type="button"
+                onclick="openDetailsModal('${unit.id}')"
+                class="flex-1 py-2.5 px-3 rounded-xl bg-[#0F2A4A] hover:bg-[#1E3A5F] active:scale-[0.99] text-white text-xs font-semibold transition-all text-center"
+              >
+                Full Details
+              </button>
+
+              <button
+                type="button"
+                onclick="shareUnitWhatsApp('${unit.id}')"
+                title="Send ${unit.name} specs on WhatsApp"
+                class="py-2.5 px-3 rounded-xl bg-white hover:bg-emerald-50 border border-slate-200 hover:border-emerald-300 text-[#0F2A4A] hover:text-emerald-800 text-xs font-semibold transition-all inline-flex items-center gap-1.5 shrink-0"
+              >
+                <svg class="w-3.5 h-3.5 text-emerald-600" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span>Send WA</span>
+              </button>
+
+              <button
+                type="button"
+                onclick="toggleCompare('${unit.id}')"
+                aria-pressed="${isComparing}"
+                class="py-2.5 px-3 rounded-xl text-xs font-semibold border transition-all shrink-0 ${
+                  isComparing
+                    ? 'bg-[#EFF6FF] border-[#1D4ED8] text-[#1D4ED8]'
+                    : 'bg-white border-slate-200 text-slate-600 hover:border-[#1D4ED8] hover:text-[#1D4ED8]'
+                }"
+              >
+                ${isComparing ? '&#10003; Comparing' : '+ Compare'}
+              </button>
+            </div>
+          </article>
+        `;
+      }).join('');
+    }
+
+    // =========================================================================
+    // VISUAL FRAME CONTROLS & EDIT MODE PHOTO UPLOAD
+    // =========================================================================
+
+    function cycleCardView(event, unitId, delta) {
+      event.stopPropagation();
+      const current = state.cardViewIndex[unitId] || 0;
+      state.cardViewIndex[unitId] = (current + delta + VIEWS.length) % VIEWS.length;
+      renderUnitsGrid();
+    }
+
+    function setCardView(event, unitId, index) {
+      event.stopPropagation();
+      state.cardViewIndex[unitId] = index;
+      renderUnitsGrid();
+    }
+
+    function toggleEditMode() {
+      state.editMode = !state.editMode;
+      const btn = document.getElementById('editModeToggleBtn');
+      const track = document.getElementById('editToggleTrack');
+      const thumb = document.getElementById('editToggleThumb');
+      const banner = document.getElementById('editModeBanner');
+
+      btn.setAttribute('aria-pressed', String(state.editMode));
+
+      if (state.editMode) {
+        track.classList.remove('bg-slate-200');
+        track.classList.add('bg-[#1D4ED8]');
+        thumb.classList.add('translate-x-3.5');
+        banner.classList.remove('hidden');
+        showToast('Edit Mode ON — Tap any card to test photos');
+      } else {
+        track.classList.add('bg-slate-200');
+        track.classList.remove('bg-[#1D4ED8]');
+        thumb.classList.remove('translate-x-3.5');
+        banner.classList.add('hidden');
+        showToast('Client Presentation Mode restored');
+      }
+      renderUnitsGrid();
+    }
+
+    function triggerPhotoUpload(event, unitId, viewKey) {
+      event.stopPropagation();
+      state.uploadTarget = { unitId, viewKey };
+      const input = document.getElementById('localPhotoInput');
+      input.value = '';
+      input.click();
+    }
+
+    function resetUploadedPhoto(event, unitId, viewKey) {
+      event.stopPropagation();
+      if (state.customPhotos[unitId] && state.customPhotos[unitId][viewKey]) {
+        URL.revokeObjectURL(state.customPhotos[unitId][viewKey]);
+        delete state.customPhotos[unitId][viewKey];
+        showToast('Restored default architectural view');
+        renderUnitsGrid();
+        if (state.activeDetailUnitId === unitId) {
+          renderDetailsModalContent();
+        }
+      }
+    }
+
+    document.getElementById('localPhotoInput').addEventListener('change', function (e) {
+      const file = e.target.files && e.target.files[0];
+      if (!file || !state.uploadTarget) return;
+
+      const { unitId, viewKey } = state.uploadTarget;
+      // Clean up previous object URL if present
+      if (state.customPhotos[unitId][viewKey]) {
+        URL.revokeObjectURL(state.customPhotos[unitId][viewKey]);
+      }
+      state.customPhotos[unitId][viewKey] = URL.createObjectURL(file);
+      showToast('Photo loaded for live preview');
+      renderUnitsGrid();
+      if (state.activeDetailUnitId === unitId) {
+        renderDetailsModalContent();
+      }
+    });
+
+    // =========================================================================
+    // FULL DETAILS MODAL
+    // =========================================================================
+
+    function openDetailsModal(unitId) {
+      state.activeDetailUnitId = unitId;
+      state.activeDetailViewIndex = state.cardViewIndex[unitId] || 0;
+      renderDetailsModalContent();
+
+      const modal = document.getElementById('detailsModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeDetailsModal() {
+      const modal = document.getElementById('detailsModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+      state.activeDetailUnitId = null;
+    }
+
+    function setDetailModalView(idx) {
+      state.activeDetailViewIndex = idx;
+      if (state.activeDetailUnitId) {
+        state.cardViewIndex[state.activeDetailUnitId] = idx;
+      }
+      renderDetailsModalContent();
+      renderUnitsGrid();
+    }
+
+    function renderDetailsModalContent() {
+      const unit = getUnitById(state.activeDetailUnitId);
+      if (!unit) return;
+
+      const viewObj = VIEWS[state.activeDetailViewIndex];
+      const isComparing = state.compareIds.includes(unit.id);
+
+      document.getElementById('detailsAirflowBadge').textContent = unit.airflowBadge;
+      document.getElementById('detailsBestForTag').textContent = `Best for: ${unit.bestForTag}`;
+      document.getElementById('detailsModalTitle').textContent = unit.name;
+
+      const body = document.getElementById('detailsModalBody');
+      body.innerHTML = `
+        <!-- Interactive Gallery Switcher -->
+        <div>
+          <div class="flex items-center justify-between gap-2 mb-2.5 flex-wrap">
+            <div class="inline-flex items-center gap-1 p-1 rounded-xl bg-slate-100 border border-slate-200/80">
+              ${VIEWS.map((v, idx) => `
+                <button
+                  type="button"
+                  onclick="setDetailModalView(${idx})"
+                  class="px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                    idx === state.activeDetailViewIndex
+                      ? 'bg-white text-[#1D4ED8] shadow-xs'
+                      : 'text-slate-600 hover:text-[#0F2A4A]'
+                  }"
+                >
+                  ${v.label}
+                </button>
+              `).join('')}
+            </div>
+
+            ${state.editMode ? `
+              <button
+                type="button"
+                onclick="triggerPhotoUpload(event, '${unit.id}', '${viewObj.key}')"
+                class="px-3 py-1.5 rounded-lg bg-[#EFF6FF] border border-blue-200 text-[#1D4ED8] text-xs font-semibold hover:bg-blue-100"
+              >
+                + Replace Photo
+              </button>
+            ` : ''}
+          </div>
+
+          <div class="aspect-[4/3] w-full rounded-2xl overflow-hidden border border-slate-200 bg-slate-50">
+            ${renderVisualContent(unit, viewObj.key)}
+          </div>
+        </div>
+
+        <!-- Complete Specifications Table -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Technical Specifications</h3>
+          <div class="rounded-xl border border-slate-200 overflow-hidden divide-y divide-slate-100 text-xs sm:text-sm">
+            ${specRow('Airflow Direction', unit.fullSpecs.airflowDirection)}
+            ${specRow('Available Capacities', unit.fullSpecs.capacities)}
+            ${specRow('Min. False Ceiling Depth', unit.fullSpecs.ceilingDepth)}
+            ${specRow('Ideal Room Type', unit.fullSpecs.idealRoomType)}
+            ${specRow('Area Coverage', unit.fullSpecs.areaCoverage)}
+            ${specRow('Noise Level', unit.fullSpecs.noiseLevel)}
+          </div>
+        </div>
+
+        <!-- Key Benefits -->
+        <div>
+          <h3 class="text-xs font-bold uppercase tracking-wider text-slate-400 mb-2.5">Key Client Benefits</h3>
+          <ul class="space-y-2">
+            ${unit.fullSpecs.keyBenefits.map(b => `
+              <li class="flex items-start gap-2.5 text-xs sm:text-sm text-slate-700 bg-[#F8FAFC] p-3 rounded-xl border border-slate-100">
+                <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><polyline points="20 6 9 17 4 12"/></svg>
+                <span>${b}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <!-- Maintenance & Service Note -->
+        <div class="p-3.5 rounded-xl bg-blue-50/70 border border-blue-100 flex items-start gap-2.5">
+          <svg class="w-4 h-4 text-[#1D4ED8] shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+          <div class="text-xs sm:text-sm text-[#0F2A4A]">
+            <strong class="font-semibold">Service &amp; Maintenance Note:</strong>
+            <span class="text-slate-600"> ${unit.fullSpecs.serviceNote}</span>
+          </div>
+        </div>
+      `;
+
+      const footer = document.getElementById('detailsModalFooter');
+      footer.innerHTML = `
+        <div class="flex items-center gap-2">
+          <button
+            type="button"
+            onclick="toggleCompare('${unit.id}'); renderDetailsModalContent();"
+            class="px-3.5 py-2 rounded-xl border text-xs sm:text-sm font-semibold transition-colors ${
+              isComparing
+                ? 'bg-[#EFF6FF] border-[#1D4ED8] text-[#1D4ED8]'
+                : 'bg-white border-slate-200 text-[#0F2A4A] hover:border-[#1D4ED8]'
+            }"
+          >
+            ${isComparing ? '&#10003; Added to Compare' : '+ Compare'}
+          </button>
+          <button
+            type="button"
+            onclick="copyUnitSpecs('${unit.id}')"
+            class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-xs sm:text-sm font-medium text-[#0F2A4A]"
+          >
+            Copy Text
+          </button>
+        </div>
+
+        <button
+          type="button"
+          onclick="shareUnitWhatsApp('${unit.id}')"
+          class="px-4 py-2.5 rounded-xl bg-[#1D4ED8] hover:bg-[#1E40AF] text-white text-xs sm:text-sm font-semibold inline-flex items-center gap-2 shadow-xs"
+        >
+          <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          <span>Send This Unit on WhatsApp</span>
+        </button>
+      `;
+    }
+
+    function specRow(label, value) {
+      return `
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-1 sm:gap-3 px-4 py-2.5 bg-white">
+          <div class="font-semibold text-slate-500">${label}</div>
+          <div class="sm:col-span-2 text-[#0F2A4A] font-medium">${value}</div>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // INSTANT SIDE-BY-SIDE COMPARISON DRAWER & MODAL
+    // =========================================================================
+
+    function toggleCompare(unitId) {
+      const idx = state.compareIds.indexOf(unitId);
+      if (idx > -1) {
+        state.compareIds.splice(idx, 1);
+      } else {
+        state.compareIds.push(unitId);
+      }
+      renderUnitsGrid();
+      renderCompareBar();
+    }
+
+    function clearCompare() {
+      state.compareIds = [];
+      renderUnitsGrid();
+      renderCompareBar();
+    }
+
+    function quickComparePreset() {
+      state.compareIds = ['1-way', '2-way', '4-way'];
+      renderUnitsGrid();
+      renderCompareBar();
+      openCompareModal();
+    }
+
+    function renderCompareBar() {
+      const bar = document.getElementById('compareBar');
+      const countPill = document.getElementById('compareCountPill');
+      const title = document.getElementById('compareBarTitle');
+      const names = document.getElementById('compareBarNames');
+      const btn = document.getElementById('openCompareBtn');
+      const btnLabel = document.getElementById('openCompareBtnLabel');
+
+      const count = state.compareIds.length;
+      if (count === 0) {
+        bar.classList.add('hidden');
+        return;
+      }
+
+      bar.classList.remove('hidden');
+      countPill.textContent = count;
+
+      const selectedUnits = state.compareIds.map(getUnitById).filter(Boolean);
+      names.textContent = selectedUnits.map(u => u.name).join(' vs ');
+
+      if (count === 1) {
+        title.textContent = 'Select 1 more unit to compare';
+        btn.disabled = true;
+        btnLabel.textContent = 'Need 2+ Units';
+      } else {
+        title.textContent = `${count} Units Ready to Compare`;
+        btn.disabled = false;
+        btnLabel.textContent = `Compare ${count} Units`;
+      }
+    }
+
+    function openCompareModal() {
+      if (state.compareIds.length < 2) {
+        showToast('Select at least 2 units to compare');
+        return;
+      }
+      renderCompareModalContent();
+      const modal = document.getElementById('compareModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeCompareModal() {
+      const modal = document.getElementById('compareModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function toggleUnitInsideCompareModal(unitId) {
+      const idx = state.compareIds.indexOf(unitId);
+      if (idx > -1) {
+        if (state.compareIds.length <= 2) {
+          showToast('Keep at least 2 units for side-by-side comparison');
+          return;
+        }
+        state.compareIds.splice(idx, 1);
+      } else {
+        state.compareIds.push(unitId);
+      }
+      renderUnitsGrid();
+      renderCompareBar();
+      renderCompareModalContent();
+    }
+
+    function renderCompareModalContent() {
+      // Quick add/remove pills at top of compare modal
+      const pillsEl = document.getElementById('compareModalUnitPills');
+      pillsEl.innerHTML = UNITS_DATA.map(u => {
+        const active = state.compareIds.includes(u.id);
+        return `
+          <button
+            type="button"
+            onclick="toggleUnitInsideCompareModal('${u.id}')"
+            class="px-3 py-1 rounded-full text-xs font-semibold border transition-colors ${
+              active
+                ? 'bg-[#0F2A4A] border-[#0F2A4A] text-white'
+                : 'bg-white border-slate-200 text-slate-600 hover:border-[#1D4ED8] hover:text-[#1D4ED8]'
+            }"
+          >
+            ${active ? '&#10003; ' : '+ '}${u.name}
+          </button>
+        `;
+      }).join('');
+
+      const units = state.compareIds.map(getUnitById).filter(Boolean);
+      const container = document.getElementById('compareTableContainer');
+
+      const rows = [
+        {
+          label: 'Visual Look',
+          render: u => `
+            <div class="w-40 sm:w-48 aspect-[4/3] rounded-xl overflow-hidden border border-slate-200 bg-slate-50">
+              ${renderVisualContent(u, 'installed')}
+            </div>
+          `
+        },
+        {
+          label: 'Airflow Pattern',
+          render: u => `<span class="inline-block px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-[#EFF6FF] text-[#1D4ED8] mb-1">${u.airflowBadge}</span><div class="text-slate-600">${u.quickChecklist.airflow}</div>`
+        },
+        {
+          label: 'Best For',
+          render: u => `<strong class="text-[#0F2A4A]">${u.bestForTag}</strong><div class="text-slate-500 text-xs mt-0.5">${u.fullSpecs.idealRoomType}</div>`
+        },
+        {
+          label: 'Capacities (TR)',
+          render: u => `<span class="font-semibold text-[#0F2A4A]">${u.quickChecklist.capacities}</span>`
+        },
+        {
+          label: 'Ceiling Depth',
+          render: u => `<span class="text-[#0F2A4A]">${u.quickChecklist.ceilingDepth}</span>`
+        },
+        {
+          label: 'Ideal Area',
+          render: u => `<span class="font-medium text-[#0F2A4A]">${u.quickChecklist.idealArea}</span>`
+        },
+        {
+          label: 'Noise Level',
+          render: u => `<span class="text-slate-600">${u.fullSpecs.noiseLevel}</span>`
+        }
+      ];
+
+      container.innerHTML = `
+        <table class="w-full border-collapse text-left text-xs sm:text-sm min-w-[540px]">
+          <thead>
+            <tr class="border-b border-slate-200">
+              <th class="py-3 pr-4 w-32 sm:w-40 text-[11px] font-bold uppercase tracking-wider text-slate-400 align-bottom">Feature</th>
+              ${units.map(u => `
+                <th class="py-3 px-3 align-bottom">
+                  <div class="text-sm sm:text-base font-bold text-[#0F2A4A]">${u.name}</div>
+                </th>
+              `).join('')}
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-slate-100">
+            ${rows.map(row => `
+              <tr>
+                <td class="py-3.5 pr-4 font-semibold text-slate-500 align-top">${row.label}</td>
+                ${units.map(u => `
+                  <td class="py-3.5 px-3 align-top">${row.render(u)}</td>
+                `).join('')}
+              </tr>
+            `).join('')}
+            <tr>
+              <td class="py-3.5 pr-4 font-semibold text-slate-500 align-middle">Action</td>
+              ${units.map(u => `
+                <td class="py-3.5 px-3">
+                  <button
+                    type="button"
+                    onclick="shareUnitWhatsApp('${u.id}')"
+                    class="px-3 py-1.5 rounded-lg bg-[#EFF6FF] hover:bg-blue-100 text-[#1D4ED8] text-xs font-semibold transition-colors"
+                  >
+                    Send ${u.shortName} on WA
+                  </button>
+                </td>
+              `).join('')}
+            </tr>
+          </tbody>
+        </table>
+      `;
+    }
+
+    // =========================================================================
+    // WHATSAPP SHARING & COPY HELPERS
+    // =========================================================================
+
+    function buildUnitSummaryText(unit) {
+      return [
+        `*KOOL MART — Service Visual Guide*`,
+        `Unit: *${unit.name}* (${unit.airflowBadge})`,
+        ``,
+        `• *Best For:* ${unit.bestForTag}`,
+        `• *Airflow:* ${unit.fullSpecs.airflowDirection}`,
+        `• *Capacities:* ${unit.quickChecklist.capacities}`,
+        `• *Ceiling Requirement:* ${unit.quickChecklist.ceilingDepth}`,
+        `• *Ideal Coverage:* ${unit.quickChecklist.idealArea}`,
+        `• *Noise Level:* ${unit.fullSpecs.noiseLevel}`,
+        ``,
+        `Let us know if you would like to compare this with another option!`
+      ].join('\n');
+    }
+
+    function shareUnitWhatsApp(unitId) {
+      const unit = getUnitById(unitId);
+      if (!unit) return;
+      const text = buildUnitSummaryText(unit);
+      const url = `https://wa.me/?text=${encodeURIComponent(text)}`;
+      window.open(url, '_blank', 'noopener,noreferrer');
+    }
+
+    function copyUnitSpecs(unitId) {
+      const unit = getUnitById(unitId);
+      if (!unit) return;
+      copyTextToClipboard(buildUnitSummaryText(unit).replace(/\*/g, ''), `${unit.name} specs copied`);
+    }
+
+    function shareCatalogueWhatsApp() {
+      const isLiveLink = window.location.protocol.startsWith('http');
+      const lines = [
+        `*KOOL MART — AC Visual Selection Guide*`,
+        `Compare 1-Way, 2-Way, 4-Way Cassette & Hi-Wall AC looks, airflow patterns, and ceiling requirements interactively.`
+      ];
+      if (isLiveLink) {
+        lines.push('', `Open Guide: ${window.location.href}`);
+      } else {
+        lines.push('', `• 1-Way Cassette: Corridors & tight spaces (0.8–2.2 TR)`,
+                   `• 2-Way Cassette: Long rectangular rooms (1.5–3.0 TR)`,
+                   `• 4-Way Cassette: Large open halls (1.5–4.0 TR)`,
+                   `• Hi-Wall Split: Zero false ceiling (1.0–2.0 TR)`);
+      }
+      window.open(`https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer');
+    }
+
+    function shareComparisonWhatsApp() {
+      const units = state.compareIds.map(getUnitById).filter(Boolean);
+      if (units.length < 2) return;
+
+      const lines = [
+        `*KOOL MART — AC Unit Comparison*`,
+        units.map(u => u.name).join(' vs '),
+        ``
+      ];
+      units.forEach(u => {
+        lines.push(
+          `*${u.name}* (${u.airflowBadge})`,
+          `• Best For: ${u.bestForTag}`,
+          `• Capacity: ${u.quickChecklist.capacities} | Area: ${u.quickChecklist.idealArea}`,
+          `• Ceiling: ${u.quickChecklist.ceilingDepth}`,
+          ``
+        );
+      });
+      window.open(`https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer');
+    }
+
+    // =========================================================================
+    // EDIT GUIDE MODAL & GLOBAL MODAL CONTROLS
+    // =========================================================================
+
+    function openEditGuideModal() {
+      const modal = document.getElementById('editGuideModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeEditGuideModal() {
+      const modal = document.getElementById('editGuideModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+      document.body.style.overflow = '';
+    }
+
+    function handleBackdropClick(event, modalId, closeFn) {
+      if (event.target && event.target.id === modalId) {
+        closeFn();
+      }
+    }
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') {
+        closeDetailsModal();
+        closeCompareModal();
+        closeEditGuideModal();
+      }
+    });
+
+    // =========================================================================
+    // INITIALIZATION
+    // =========================================================================
+
+    function renderAll() {
+      renderCategoryTabs();
+      renderRoomFilters();
+      renderUnitsGrid();
+      renderCompareBar();
+    }
+
+    window.addEventListener('DOMContentLoaded', function () {
+      document.getElementById('footerYear').textContent = new Date().getFullYear();
+      renderAll();
+    });
+  </script>
+</body>
+</html>

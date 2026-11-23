@@ -1939,6 +1939,7 @@
         `• *Ideal Coverage:* ${unit.quickChecklist.idealArea}`,
         `• *Noise Level:* ${unit.fullSpecs.noiseLevel}`,
         ``,
+        `View Interactive Guide: ${window.location.href}`,
         `Let us know if you would like to compare this with another option!`
       ].join('\n');
     }
@@ -1992,6 +1993,7 @@
           ``
         );
       });
+      lines.push(`View Interactive Guide: ${window.location.href}`);
       window.open(`https://wa.me/?text=${encodeURIComponent(lines.join('\n'))}`, '_blank', 'noopener,noreferrer');
     }
 
